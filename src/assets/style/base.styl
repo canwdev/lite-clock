@@ -3,6 +3,13 @@ $darkText = #ebebeb
 $lightBg = #fff
 $lightText = #333
 
+body {
+  //background url("https://www.bing.com/th?id=OHR.LionSurfing_ZH-CN7369892268_1920x1080.jpg") no-repeat center/cover
+  background-position center
+  background-repeat no-repeat
+  background-size cover
+}
+
 .clock-wrapper {
   overflow: auto;
   width: 100%
@@ -13,6 +20,10 @@ $lightText = #333
   position: relative;
   user-select none
   font-family sans
+
+  &.bing {
+    background rgba(0,0,0,0.3)
+  }
 
   .settings-wrapper {
     position: absolute;
