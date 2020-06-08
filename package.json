@@ -42,6 +42,7 @@
  },
  "dependencies": {
   "moment": "^2.26.0",
-  "normalize.css": "^8.0.1"
+  "normalize.css": "^8.0.1",
+  "nosleep.js": "^0.11.0"
  }
 }
