@@ -27,12 +27,12 @@ listEl.style.display = 'none'
 /**
  * 切换Bing壁纸
  */
-let flagThemeBing = false
+let flagThemeBing = true
 
-function toggleBing(disable) {
-  if (disable) flagThemeBing = false
+function toggleBing(forceState = null) {
+  const flag = forceState !== null ? forceState : flagThemeBing
 
-  if (!flagThemeBing) {
+  if (flag) {
     setBingWallpaper()
     rootEl.classList.add('bing')
     rootEl.classList.remove('light-theme')
@@ -41,9 +41,9 @@ function toggleBing(disable) {
     rootEl.classList.remove('bing')
   }
   updateQuery({
-    theme: flagThemeBing ? null : 'bing'
+    theme: flag ? 'bing' : null
   })
-  flagThemeBing = !flagThemeBing
+  flagThemeBing = !flag
 }
 
 
@@ -53,7 +53,7 @@ function toggleBing(disable) {
 let flagThemeDark = false
 
 function toggleTheme() {
-  toggleBing(true)
+  toggleBing(false)
   if (!flagThemeDark) {
     rootEl.classList.add('light-theme')
   } else {
@@ -66,7 +66,7 @@ function toggleTheme() {
 }
 
 if (queryObj.theme === 'bing') {
-  toggleBing()
+  toggleBing(true)
 } else if (queryObj.theme === 'light') {
   toggleTheme()
 }

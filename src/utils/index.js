@@ -21,7 +21,8 @@ export function updateQuery(obj) {
   const queryString = qs.stringify({...query, ...obj})
 
   if (history.pushState) {
-    const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + queryString
+    const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname +
+      (queryString ? ('?' + queryString) : '')
     window.history.pushState({path: newurl}, '', newurl);
   } else {
     location.search = queryString
