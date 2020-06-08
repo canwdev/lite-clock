@@ -3,6 +3,7 @@ const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
         use: {
           loader: "url-loader",
           options: {
-            name: '[name]_[hash:8].[ext]',
+            name: 'img/[name].[hash:7].[ext]',
             outputPath: 'img/',
             limit: 8192
           }
@@ -54,11 +55,8 @@ module.exports = {
         {from: 'public'},
       ],
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new OptimizeCSSAssetsPlugin()
     // new BundleAnalyzerPlugin() // 开启打包分析
-  ],
-  optimization: {
-    // https://www.webpackjs.com/plugins/split-chunks-plugin/
-    splitChunks: {}
-  }
+  ]
 }
