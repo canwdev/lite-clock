@@ -1,23 +1,32 @@
+$darkBg = #000
+$darkText = #ebebeb
+$lightBg = #fff
+$lightText = #333
+
 .clock-wrapper {
   overflow: auto;
   width: 100%
   height: 100%
-  background #000
-  color #ffffff
+  background url("../images/bg.svg") no-repeat center / cover
+  background-color $darkBg
+  color $darkText
   position: relative;
-  font-family: monospace, serif;
+  user-select none
 
   .settings-wrapper {
     position: absolute;
     top: 10px
     left: 10px
-    .toggle-settings {
+
+    button {
       background transparent
       border none
       outline none
       font-size: 20px
       opacity 0.2
-      color #fff
+      color $darkText
+      cursor pointer
+
       &:hover {
         opacity 1
       }
@@ -36,10 +45,22 @@
       font-size: 10vw
       margin 0
     }
+
     h2 {
       font-size: 5vw
       margin-top: 5vh
       margin-bottom: 0
     }
   }
+
+  &.light-theme {
+    background-color $lightBg
+    color $lightText
+    .settings-wrapper {
+      button {
+        color $lightText
+      }
+    }
+  }
 }
+

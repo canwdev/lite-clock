@@ -9,9 +9,10 @@
   <style>html, body {height: 100%;} body {background: #000;}</style>
 </head>
 <body>
-  <div class="clock-wrapper">
+  <div id="root" class="clock-wrapper">
     <div class="settings-wrapper">
-      <button class="toggle-settings">◯</button>
+      <button id="settings_toggle" class="toggle-settings">…</button>
+      <span id="settings_list"></span>
     </div>
     <div class="clock-centered">
       <h1 id="acc_time"></h1>
