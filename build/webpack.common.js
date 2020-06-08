@@ -1,6 +1,8 @@
 const path = require('path')
 const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -29,7 +31,7 @@ module.exports = {
       {
         test: /\.(styl|css)$/i,
         // loader 执行顺序是从后往前
-        use: ["style-loader", "css-loader", "postcss-loader", "stylus-loader"]
+        use: ["style-loader", MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "stylus-loader"]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -47,11 +49,16 @@ module.exports = {
       template: "./src/index.html",
       title: 'Lite Clock'
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {from: 'public'},
+      ],
+    }),
+    new MiniCssExtractPlugin()
     // new BundleAnalyzerPlugin() // 开启打包分析
   ],
   optimization: {
     // https://www.webpackjs.com/plugins/split-chunks-plugin/
-    splitChunks: {
-    }
+    splitChunks: {}
   }
 }

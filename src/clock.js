@@ -29,7 +29,7 @@ let lastDateText = null
 
 function updateTime() {
   const dt = new Date()
-  acc_time.innerText = moment(dt).format('HH:MM:SS')
+  acc_time.innerText = moment(dt).format('HH:mm:ss')
 
   const dateText = moment(dt).format('LL dddd')
   if (dateText !== lastDateText) {
