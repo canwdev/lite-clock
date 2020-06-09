@@ -1,9 +1,15 @@
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const config = {
   mode: "production",
   devtool: "none",
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new OptimizeCSSAssetsPlugin()
+  ],
   optimization: {
     // https://www.webpackjs.com/plugins/split-chunks-plugin/
     splitChunks: {

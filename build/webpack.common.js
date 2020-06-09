@@ -3,8 +3,7 @@ const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   entry: {
@@ -32,7 +31,7 @@ module.exports = {
       {
         test: /\.(styl|css)$/i,
         // loader 执行顺序是从后往前
-        use: ["style-loader", MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "stylus-loader"]
+        use: [isProd ? MiniCssExtractPlugin.loader : "style-loader", "css-loader", "postcss-loader", "stylus-loader"]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -54,9 +53,6 @@ module.exports = {
       patterns: [
         {from: 'public'},
       ],
-    }),
-    new MiniCssExtractPlugin(),
-    new OptimizeCSSAssetsPlugin()
-    // new BundleAnalyzerPlugin() // 开启打包分析
+    })
   ]
 }

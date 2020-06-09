@@ -15,7 +15,8 @@
  "scripts": {
   "start": "webpack-dev-server --config build/webpack.dev.js",
   "build": "webpack --config build/webpack.prod.js",
-  "build-dev": "webpack --config build/webpack.dev.js"
+  "build-dev": "webpack --config build/webpack.dev.js",
+  "analyze": "webpack --config build/webpack.analyze.js"
  },
  "devDependencies": {
   "@babel/core": "^7.9.6",
