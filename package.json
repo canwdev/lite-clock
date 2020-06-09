@@ -14,9 +14,9 @@
  "homepage": "https://github.com/canwdev/lite-clock#readme",
  "scripts": {
   "start": "webpack-dev-server --config build/webpack.dev.js",
-  "build": "webpack --config build/webpack.prod.js",
+  "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.js",
   "build-dev": "webpack --config build/webpack.dev.js",
-  "analyze": "webpack --config build/webpack.analyze.js"
+  "analyze": "cross-env NODE_ENV=production webpack --config build/webpack.analyze.js"
  },
  "devDependencies": {
   "@babel/core": "^7.9.6",
@@ -28,6 +28,7 @@
   "clean-webpack-plugin": "^3.0.0",
   "copy-webpack-plugin": "^6.0.2",
   "core-js": "^3.6.5",
+  "cross-env": "^7.0.2",
   "css-loader": "^3.5.2",
   "file-loader": "^6.0.0",
   "html-webpack-plugin": "^4.2.0",
