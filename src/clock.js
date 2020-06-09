@@ -4,12 +4,10 @@ import moment from 'moment'
  * https://stackoverflow.com/a/29972322
  * @param callback
  */
-let timeout = null
 function timer(callback) {
   const interval = 1000
-  timeout = null
   let expected = Date.now() + interval;
-  timeout = setTimeout(step, interval);
+  setTimeout(step, interval);
 
   function step() {
     const dt = Date.now() - expected; // the drift (positive for overshooting)
@@ -18,7 +16,7 @@ function timer(callback) {
     }
     callback()
     expected += interval;
-    timeout = setTimeout(step, Math.max(0, interval - dt)); // take into account drift
+    setTimeout(step, Math.max(0, interval - dt)); // take into account drift
   }
 }
 

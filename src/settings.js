@@ -8,19 +8,14 @@ const queryObj = getQueryObj()
 
 /**
  * 切换是否显示设置图标
- * @returns {function(...[*]=)}
- * @private
  */
-function _toggleSettingsDisplay() {
-  let flag = true
-  return function () {
-    flag = !flag
-    listEl.style.display = flag ? 'none' : null
-  }
+let flagShowSettings = false
+function toggleSettingsDisplay() {
+  listEl.style.display = flagShowSettings ? 'none' : null
+  flagShowSettings = !flagShowSettings
 }
 
-const toggleSettingsDisplay = _toggleSettingsDisplay()
-toggleEl.onclick = toggleSettingsDisplay
+toggleEl.addEventListener('click', toggleSettingsDisplay)
 listEl.style.display = 'none'
 
 
@@ -87,10 +82,8 @@ function addSettings() {
 
   settingsList.forEach(item => {
     const btn = document.createElement('button')
-    btn.onclick = () => {
-      item.action()
-      toggleSettingsDisplay()
-    }
+    btn.addEventListener('click', item.action)
+
     btn.innerText = item.name
     listEl.appendChild(btn)
   })
