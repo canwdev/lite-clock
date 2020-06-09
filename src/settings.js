@@ -10,6 +10,7 @@ const queryObj = getQueryObj()
  * 切换是否显示设置图标
  */
 let flagShowSettings = false
+
 function toggleSettingsDisplay() {
   listEl.style.display = flagShowSettings ? 'none' : null
   flagShowSettings = !flagShowSettings
@@ -26,7 +27,6 @@ let flagThemeBing = true
 
 function toggleBing(forceState = null) {
   const flag = forceState !== null ? forceState : flagThemeBing
-
   if (flag) {
     setBingWallpaper()
     rootEl.classList.add('bing')
@@ -71,7 +71,11 @@ if (queryObj.theme === 'bing') {
  */
 function addSettings() {
   const settingsList = [
-    {name: 'B', action: toggleBing},
+    {
+      name: 'B', action: () => {
+        toggleBing()
+      }
+    },
     {name: '☯', action: toggleTheme},
     {
       name: '▢', action: () => {
