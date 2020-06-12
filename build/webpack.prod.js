@@ -1,17 +1,26 @@
+const utils = require('./utils')
 const merge = require('webpack-merge')
-const commonConfig = require('./webpack.common')
+const commonConfig = require('./webpack.base')
+const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const utils = require('./utils')
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const config = {
   mode: "production",
   devtool: "none",
   plugins: [
+    new CleanWebpackPlugin(), // 清理打包目录
     new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css')
     }),
-    new OptimizeCSSAssetsPlugin()
+    new OptimizeCSSAssetsPlugin(),
+    new WorkboxPlugin.GenerateSW({
+      // 这些选项帮助快速启用 ServiceWorkers
+      // 不允许遗留任何“旧的” ServiceWorkers
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
   ],
   optimization: {
     // https://www.webpackjs.com/plugins/split-chunks-plugin/

@@ -1,5 +1,5 @@
 const merge = require('webpack-merge')
-const commonConfig = require('./webpack.common')
+const commonConfig = require('./webpack.base')
 const webpack = require('webpack')
 
 const config = {
@@ -9,6 +9,8 @@ const config = {
   devServer: {
     host: '0.0.0.0',
     contentBase: './dist',
+    compress: true,
+    // writeToDisk:true,
     open: false,
     hot: true, // HMR
     // hotOnly: true // HMR开启时 不要自动刷新

@@ -1,5 +1,4 @@
 const path = require('path')
-const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -13,8 +12,8 @@ module.exports = {
   output: {
     publicPath: "./", // 可设置 CDN 或基本路径
     path: path.join(__dirname, '../dist'),
-    filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    filename: utils.assetsPath('js/[name].[hash].js'),
+    chunkFilename: utils.assetsPath('js/[id].[hash].js')
   },
   module: {
     rules: [
@@ -53,7 +52,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(), // 清理打包目录
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       title: 'Lite Clock'
