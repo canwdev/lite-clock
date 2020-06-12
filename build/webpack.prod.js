@@ -2,12 +2,15 @@ const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const utils = require('./utils')
 
 const config = {
   mode: "production",
   devtool: "none",
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: utils.assetsPath('css/[name].[contenthash].css')
+    }),
     new OptimizeCSSAssetsPlugin()
   ],
   optimization: {
