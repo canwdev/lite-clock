@@ -28,3 +28,5 @@ export function updateQuery(obj) {
     location.search = queryString
   }
 }
+
+export const isProd = process.env.NODE_ENV === 'production'

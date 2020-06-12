@@ -1,9 +1,11 @@
 import screenfull from "screenfull"
-import {getQueryObj, updateQuery} from "./utils"
+import {getQueryObj, isProd, updateQuery} from "./utils"
 
 const rootEl = document.getElementById('root')
 const toggleEl = document.getElementById('settings_toggle')
 const listEl = document.getElementById('settings_list')
+const timeEl = document.getElementById('acc_time')
+const dateEl = document.getElementById('acc_date')
 const queryObj = getQueryObj()
 
 /**
@@ -67,18 +69,58 @@ if (queryObj.theme === 'bing') {
 }
 
 /**
+ * 切换字体缩放
+ */
+let scaleRatio = queryObj.scale || 1
+
+function toggleFontSize() {
+  const ratioText = prompt('缩放率', scaleRatio)
+  if (!ratioText) return
+
+  const ratio = parseFloat(ratioText)
+  if (Number.isNaN(ratio)) {
+    alert('请输入一个数值')
+    return
+  }
+  setFontSizeRatio(ratio)
+}
+
+function setFontSizeRatio(ratio) {
+  updateQuery({
+    scale: ratio !== 1 ? ratio : null
+  })
+  if (ratio === 1) return
+  timeEl.style.fontSize = 16 * ratio + 'vw'
+  dateEl.style.fontSize = 6 * ratio + 'vw'
+}
+
+setFontSizeRatio(scaleRatio)
+
+/**
  * 添加设置图标
  */
 function addSettings() {
   const settingsList = [
     {
-      name: 'B', action: () => {
+      title: '字体缩放',
+      name: '𝓕', action: () => {
+        toggleFontSize()
+      }
+    },
+    {
+      title: 'Bing 壁纸',
+      name: '𝓑', action: () => {
         toggleBing()
       }
     },
-    {name: '☯', action: toggleTheme},
     {
-      name: '▢', action: () => {
+      title: '黑白切换',
+      name: '☯',
+      action: toggleTheme
+    },
+    {
+      title: '全屏切换',
+      name: '⌗', action: () => {
         screenfull.toggle()
       }
     },
@@ -87,13 +129,15 @@ function addSettings() {
   settingsList.forEach(item => {
     const btn = document.createElement('button')
     btn.addEventListener('click', item.action)
-
     btn.innerText = item.name
+    btn.title = item.title
     listEl.appendChild(btn)
   })
 }
 
 addSettings()
+
+const BING_API = isProd ? 'http://zencode.top:9003' : '/bing'
 
 function setBingWallpaper(clear = false) {
   if (clear) {
@@ -101,14 +145,22 @@ function setBingWallpaper(clear = false) {
     return
   }
 
-  // 有跨域
-  /*import('axios').then(({default: axios}) => {
-    axios.get('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1').then(res => {
-      console.log(res)
+  /**
+   * 原接Bing口有跨域问题，需要使用反向代理
+   * https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
+   */
+  import('axios').then(({default: axios}) => {
+    axios.get(BING_API + '/HPImageArchive.aspx?format=js&idx=0&n=1').then(res => {
+      const {data} = res
+
+      const image = data.images[0]
+      const url = `https://www.bing.com${image.url}`
+      console.log('Today Bing wallpaper', url)
+      document.body.style.backgroundImage = `url('${url}')`
     }).catch(e => {
       console.error(e)
     })
-  })*/
+  })
 
-  document.body.style.backgroundImage = `url('https://api.dujin.org/bing/1920.php')`
+  // document.body.style.backgroundImage = `url('https://api.dujin.org/bing/1920.php')`
 }
