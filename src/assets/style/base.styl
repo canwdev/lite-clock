@@ -25,7 +25,7 @@ body {
   color $darkText
   position: relative;
   user-select none
-  font-family sans
+  font-family sans-serif
 
   &.bing {
     background rgba(0, 0, 0, 0.1)
@@ -36,7 +36,6 @@ body {
     top: $commonPadding
     right: $commonPadding
     z-index 99
-    opacity 0.2
 
     button {
       background transparent
@@ -45,6 +44,7 @@ body {
       font-size: 20px
       color $darkText
       cursor pointer
+      opacity 0.2
 
       &:hover {
         opacity 1
@@ -68,11 +68,11 @@ body {
     h1 {
       font-size: 16vw
       font-weight: bolder
+      line-height: 1.1
     }
 
     h2 {
       font-size: 6vw
-      margin-top: 20px
       font-weight normal
     }
   }
@@ -86,6 +86,7 @@ body {
     z-index 99
     opacity 0.5
     line-height: 1.4
+
     a {
       font-size: 12px
       color: #fff

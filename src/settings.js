@@ -107,13 +107,13 @@ function addSettings() {
   const settingsList = [
     {
       title: '字体缩放',
-      name: '𝓕', action: () => {
-        toggleFontSize()
+      name: 'F', action: () => {
+        toggleFontSize(scaleRatio)
       }
     },
     {
       title: 'Bing 壁纸',
-      name: '𝓑', action: () => {
+      name: 'B', action: () => {
         toggleBing()
       }
     },
