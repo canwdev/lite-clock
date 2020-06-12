@@ -1,5 +1,5 @@
 import screenfull from "screenfull"
-import {getQueryObj, isProd, updateQuery} from "./utils"
+import {getSettingsLS, isProd, updateSettingsLS} from "./utils"
 
 const rootEl = document.getElementById('root')
 const toggleEl = document.getElementById('settings_toggle')
@@ -7,7 +7,7 @@ const listEl = document.getElementById('settings_list')
 const timeEl = document.getElementById('acc_time')
 const dateEl = document.getElementById('acc_date')
 const footnoteTextEl = document.getElementById('footnote_text')
-const queryObj = getQueryObj()
+const queryObj = getSettingsLS()
 
 /**
  * 切换是否显示设置图标
@@ -38,7 +38,7 @@ function toggleBing(forceState = null) {
     setBingWallpaper(true)
     rootEl.classList.remove('bing')
   }
-  updateQuery({
+  updateSettingsLS({
     theme: flag ? 'bing' : null
   })
   flagThemeBing = !flag
@@ -57,7 +57,7 @@ function toggleTheme() {
   } else {
     rootEl.classList.remove('light-theme')
   }
-  updateQuery({
+  updateSettingsLS({
     theme: flagThemeDark ? null : 'light'
   })
   flagThemeDark = !flagThemeDark
@@ -87,7 +87,7 @@ function toggleFontSize() {
 }
 
 function setFontSizeRatio(ratio) {
-  updateQuery({
+  updateSettingsLS({
     scale: ratio !== 1 ? ratio : null
   })
   if (ratio === 1) {
@@ -141,7 +141,7 @@ function addSettings() {
 
 addSettings()
 
-const BING_API = isProd ? 'http://zencode.top:9003' : '/bing'
+const BING_API = isProd ? 'https://zencode.top:9003' : '/bing'
 
 function setBingWallpaper(clear = false) {
   if (clear) {

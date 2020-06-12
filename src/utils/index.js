@@ -29,4 +29,23 @@ export function updateQuery(obj) {
   }
 }
 
+const LS_KEY = 'LITE_CLOCK_SETTINGS'
+
+export function getSettingsLS() {
+  return qs.parse(localStorage.getItem(LS_KEY)) || {}
+}
+
+export function updateSettingsLS(obj) {
+  const query = getQueryObj()
+
+  for (let key in obj) {
+    if (obj[key] === null) {
+      delete query[key]
+      delete obj[key]
+    }
+  }
+  const queryString = qs.stringify({...query, ...obj})
+  localStorage.setItem(LS_KEY, queryString)
+}
+
 export const isProd = process.env.NODE_ENV === 'production'
