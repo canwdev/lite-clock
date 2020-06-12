@@ -36,7 +36,7 @@ export function getSettingsLS() {
 }
 
 export function updateSettingsLS(obj) {
-  const query = getQueryObj()
+  const query = getSettingsLS()
 
   for (let key in obj) {
     if (obj[key] === null) {
