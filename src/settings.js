@@ -6,6 +6,7 @@ const toggleEl = document.getElementById('settings_toggle')
 const listEl = document.getElementById('settings_list')
 const timeEl = document.getElementById('acc_time')
 const dateEl = document.getElementById('acc_date')
+const footnoteTextEl = document.getElementById('footnote_text')
 const queryObj = getQueryObj()
 
 /**
@@ -89,7 +90,10 @@ function setFontSizeRatio(ratio) {
   updateQuery({
     scale: ratio !== 1 ? ratio : null
   })
-  if (ratio === 1) return
+  if (ratio === 1) {
+    timeEl.style.fontSize = null
+    dateEl.style.fontSize = null
+  }
   timeEl.style.fontSize = 16 * ratio + 'vw'
   dateEl.style.fontSize = 6 * ratio + 'vw'
 }
@@ -142,6 +146,7 @@ const BING_API = isProd ? 'http://zencode.top:9003' : '/bing'
 function setBingWallpaper(clear = false) {
   if (clear) {
     document.body.style.backgroundImage = null
+    footnoteTextEl.innerText = ''
     return
   }
 
@@ -155,8 +160,9 @@ function setBingWallpaper(clear = false) {
 
       const image = data.images[0]
       const url = `https://www.bing.com${image.url}`
-      console.log('Today Bing wallpaper', url)
+      console.log('Today Bing wallpaper', url, data)
       document.body.style.backgroundImage = `url('${url}')`
+      footnoteTextEl.innerText = image.copyright
     }).catch(e => {
       console.error(e)
     })
