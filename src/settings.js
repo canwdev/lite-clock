@@ -163,6 +163,7 @@ function setBingWallpaper(clear = false) {
       console.log('Today Bing wallpaper', url, data)
       document.body.style.backgroundImage = `url('${url}')`
       footnoteTextEl.innerText = image.copyright
+      footnoteTextEl.href = url
     }).catch(e => {
       console.error(e)
     })
