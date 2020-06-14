@@ -23,6 +23,9 @@ const config = {
     }),
   ],
   optimization: {
+    runtimeChunk: {
+      name: 'runtime'
+    },
     // https://www.webpackjs.com/plugins/split-chunks-plugin/
     splitChunks: {
       cacheGroups: {

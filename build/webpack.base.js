@@ -12,8 +12,8 @@ module.exports = {
   output: {
     publicPath: "./", // 可设置 CDN 或基本路径
     path: path.join(__dirname, '../dist'),
-    filename: utils.assetsPath('js/[name].[hash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[hash].js')
+    filename: utils.assetsPath('js/[name].[contenthash].js'),
+    chunkFilename: utils.assetsPath('js/[id].[contenthash].js')
   },
   module: {
     rules: [
