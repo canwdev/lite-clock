@@ -9,6 +9,10 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const config = {
   mode: "production",
   devtool: "none",
+  output: {
+    filename: utils.assetsPath('js/[name].[contenthash].js'),
+    chunkFilename: utils.assetsPath('js/[id].[contenthash].js')
+  },
   plugins: [
     new CleanWebpackPlugin(), // 清理打包目录
     new MiniCssExtractPlugin({
