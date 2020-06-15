@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = process.env.NODE_ENV === 'production'
 const utils = require('./utils')
+const package = require('../package.json')
 
 module.exports = {
   entry: {
@@ -54,7 +55,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      title: 'Lite Clock'
+      title: 'Lite Clock v' + package.version
     }),
     new CopyWebpackPlugin({
       patterns: [
