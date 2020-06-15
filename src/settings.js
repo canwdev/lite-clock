@@ -9,6 +9,11 @@ const dateEl = document.getElementById('acc_date')
 const footnoteTextEl = document.getElementById('footnote_text')
 const queryObj = getSettingsLS()
 
+// 常量定义
+const BING_API = isProd ? 'https://zencode.top:9003' : '/bing';
+const LS_BING_DATA = 'LITE_CLOCK_BING_WALLPAPER';
+let timeoutBingWallpaper = null
+
 /**
  * 切换是否显示设置图标
  */
@@ -141,12 +146,25 @@ function addSettings() {
 
 addSettings()
 
-const BING_API = isProd ? 'https://zencode.top:9003' : '/bing'
 
 function setBingWallpaper(clear = false) {
+  clearTimeout(timeoutBingWallpaper)
+
   if (clear) {
     document.body.style.backgroundImage = null
     footnoteTextEl.innerText = ''
+    localStorage.removeItem(LS_BING_DATA)
+    return
+  }
+
+  const lsData = JSON.parse(localStorage.getItem(LS_BING_DATA) || 'null')
+  const expireTime = bingWallpaperExpireTime(lsData)
+
+  if (lsData && expireTime > 0) {
+    setBingWallpaperDOM(lsData)
+    // 定时自动刷新 Bing 壁纸（延迟1分钟）
+    timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime + 60000)
+    console.log(timeoutBingWallpaper, expireTime)
     return
   }
 
@@ -158,16 +176,41 @@ function setBingWallpaper(clear = false) {
     axios.get(BING_API + '/HPImageArchive.aspx?format=js&idx=0&n=1').then(res => {
       const {data} = res
 
-      const image = data.images[0]
-      const url = `https://www.bing.com${image.url}`
-      console.log('Today Bing wallpaper', url, data)
-      document.body.style.backgroundImage = `url('${url}')`
-      footnoteTextEl.innerText = image.copyright
-      footnoteTextEl.href = url
+      setBingWallpaperDOM(data)
+      console.log('Today Bing wallpaper', data)
+
+      localStorage.setItem(LS_BING_DATA, JSON.stringify(data))
     }).catch(e => {
       console.error(e)
     })
   })
 
+
   // document.body.style.backgroundImage = `url('https://api.dujin.org/bing/1920.php')`
+}
+
+function setBingWallpaperDOM(data) {
+  const image = data.images[0]
+  const url = `https://www.bing.com${image.url}`
+  document.body.style.backgroundImage = `url('${url}')`
+  footnoteTextEl.innerText = image.copyright
+  footnoteTextEl.href = url
+}
+
+/**
+ * 获取Bing壁纸到期时间
+ */
+function bingWallpaperExpireTime(data) {
+  if (!data) return 0
+
+  const image = data.images[0]
+  const endDateStr = image.enddate
+  const year = Number.parseInt(endDateStr.substr(0, 4))
+  const month = Number.parseInt(endDateStr.substr(4, 2))
+  const day = Number.parseInt(endDateStr.substr(6, 2))
+
+  const expireDate = new Date(year, month - 1, day + 1)
+  const now = new Date()
+  // console.log('bingWallpaperExpireTime', expireDate - now)
+  return expireDate - now
 }
