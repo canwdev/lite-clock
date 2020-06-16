@@ -148,7 +148,6 @@ addSettings()
 
 
 function setBingWallpaper(clear = false) {
-  clearTimeout(timeoutBingWallpaper)
 
   if (clear) {
     document.body.style.backgroundImage = null
@@ -162,9 +161,7 @@ function setBingWallpaper(clear = false) {
 
   if (lsData && expireTime > 0) {
     setBingWallpaperDOM(lsData)
-    // 定时自动刷新 Bing 壁纸（延迟1分钟）
-    timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime + 60000)
-    console.log(timeoutBingWallpaper, expireTime)
+    autoUpdateBingWallpaper({expireTime})
     return
   }
 
@@ -180,6 +177,7 @@ function setBingWallpaper(clear = false) {
       console.log('Today Bing wallpaper', data)
 
       localStorage.setItem(LS_BING_DATA, JSON.stringify(data))
+      autoUpdateBingWallpaper({data})
     }).catch(e => {
       console.error(e)
     })
@@ -213,4 +211,16 @@ function bingWallpaperExpireTime(data) {
   const now = new Date()
   // console.log('bingWallpaperExpireTime', expireDate - now)
   return expireDate - now
+}
+
+function autoUpdateBingWallpaper({data, expireTime}) {
+  clearTimeout(timeoutBingWallpaper)
+
+  if (!expireTime) {
+    expireTime = bingWallpaperExpireTime(data)
+  }
+
+  // 定时自动刷新 Bing 壁纸（延迟1分钟）
+  timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime + 60000)
+  console.log('autoUpdateBingWallpaper', expireTime)
 }
