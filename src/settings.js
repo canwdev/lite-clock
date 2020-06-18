@@ -150,6 +150,7 @@ addSettings()
 function setBingWallpaper(clear = false) {
 
   if (clear) {
+    clearTimeout(timeoutBingWallpaper)
     document.body.style.backgroundImage = null
     footnoteTextEl.innerText = ''
     localStorage.removeItem(LS_BING_DATA)
@@ -220,7 +221,7 @@ function autoUpdateBingWallpaper({data, expireTime}) {
     expireTime = bingWallpaperExpireTime(data)
   }
 
-  // 定时自动刷新 Bing 壁纸（延迟1分钟）
-  timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime + 60000)
+  // 定时自动刷新 Bing 壁纸（延迟1小时）
+  timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime + 600000)
   console.log('autoUpdateBingWallpaper', expireTime)
 }
