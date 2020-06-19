@@ -6879,6 +6879,18 @@ vary@~1.1.2:
   resolved "http://nuget.fnlinker.com/repository/npm-group/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
+vconsole-webpack-plugin@^1.5.1:
+  version "1.5.1"
+  resolved "http://nuget.fnlinker.com/repository/npm-group/vconsole-webpack-plugin/-/vconsole-webpack-plugin-1.5.1.tgz#b3032b07d94f22697c4a0e00710bdae4915ed3a2"
+  integrity sha512-L9M6kI+hlzAgaEMaqLqJlbB/fDLuefLb6M/apgibD4581ngA63tkf3IwpPEnnxUL09OKtfDmDWUWYNdrGBNExw==
+  dependencies:
+    vconsole "^3.1.0"
+
+vconsole@^3.1.0:
+  version "3.3.4"
+  resolved "http://nuget.fnlinker.com/repository/npm-group/vconsole/-/vconsole-3.3.4.tgz#a7dacd8887b3d3e902e8d18425cda56c34e77f51"
+  integrity sha512-9yihsic96NPoMLQx/lCQwH9d89H0bbMW3LZPzo/t4yGQcS1X+vTCe9OHm1XSH7WNxzGDmcSwBiKLsFGwvJpQBg==
+
 vendors@^1.0.0:
   version "1.0.4"
   resolved "http://nuget.fnlinker.com/repository/npm-group/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"

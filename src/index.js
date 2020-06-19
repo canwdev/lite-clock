@@ -15,5 +15,10 @@ if (isProd && 'serviceWorker' in navigator) {
     });
   });
 } else {
-  navigator.serviceWorker.getRegistrations().then( function(registrations) { for(let registration of registrations) { registration.unregister(); } });
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
+  });
 }
+

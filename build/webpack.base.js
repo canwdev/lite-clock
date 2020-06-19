@@ -4,7 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = process.env.NODE_ENV === 'production'
 const utils = require('./utils')
-const package = require('../package.json')
+const pkg = require('../package.json')
+const vConsolePlugin = require('vconsole-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -55,12 +56,16 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      title: 'Lite Clock v' + package.version
+      title: 'Lite Clock v' + pkg.version
     }),
     new CopyWebpackPlugin({
       patterns: [
         {from: 'public'},
       ],
-    })
+    }),
+    new vConsolePlugin({
+      filter: [],  // 需要过滤的入口文件
+      enable: isProd && process.env.VCONSOLE
+    }),
   ]
 }

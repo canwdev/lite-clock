@@ -1,4 +1,5 @@
 import screenfull from "screenfull"
+import moment from "moment"
 import {getSettingsLS, isProd, updateSettingsLS} from "./utils"
 
 const rootEl = document.getElementById('root')
@@ -175,7 +176,7 @@ function setBingWallpaper(clear = false) {
       const {data} = res
 
       setBingWallpaperDOM(data)
-      console.log('Today Bing wallpaper', data)
+      console.log('Bing壁纸更新！', moment(Date.now()).format('HH:mm:ss LL dddd'), data)
 
       localStorage.setItem(LS_BING_DATA, JSON.stringify(data))
       autoUpdateBingWallpaper({data})
@@ -210,7 +211,7 @@ function bingWallpaperExpireTime(data) {
 
   const expireDate = new Date(year, month - 1, day + 1)
   const now = new Date()
-  // console.log('bingWallpaperExpireTime', expireDate - now)
+  console.log('Bing壁纸过期时间', moment(expireDate).from(now))
   return expireDate - now
 }
 
@@ -222,6 +223,8 @@ function autoUpdateBingWallpaper({data, expireTime}) {
   }
 
   // 定时自动刷新 Bing 壁纸（延迟1小时）
-  timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime + 600000)
-  console.log('autoUpdateBingWallpaper', expireTime)
+  expireTime+=600000
+
+  timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime)
+  console.log('下次Bing壁纸更新时间', moment(Date.now() + expireTime).format('HH:mm:ss LL dddd'))
 }
