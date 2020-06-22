@@ -14,6 +14,7 @@ const queryObj = getSettingsLS()
 const BING_API = isProd ? 'https://zencode.top:9003' : '/bing';
 const LS_BING_DATA = 'LITE_CLOCK_BING_WALLPAPER';
 let timeoutBingWallpaper = null
+let retryTimes = 0 // 防止死循环
 
 /**
  * 切换是否显示设置图标
@@ -150,7 +151,12 @@ addSettings()
 
 function setBingWallpaper(clear = false) {
 
-  if (clear) {
+  const retryFail = retryTimes > 3
+  if (clear || retryFail) {
+    if (retryFail) {
+      console.log('重试3遍仍然失败，取消请求')
+      retryTimes = 0
+    }
     clearTimeout(timeoutBingWallpaper)
     document.body.style.backgroundImage = null
     footnoteTextEl.innerText = ''
@@ -180,8 +186,10 @@ function setBingWallpaper(clear = false) {
 
       localStorage.setItem(LS_BING_DATA, JSON.stringify(data))
       autoUpdateBingWallpaper({data})
+      retryTimes = 0
     }).catch(e => {
       console.error(e)
+      retryTimes++
     })
   })
 
@@ -223,7 +231,7 @@ function autoUpdateBingWallpaper({data, expireTime}) {
   }
 
   // 定时自动刷新 Bing 壁纸（延迟1小时）
-  expireTime+=600000
+  expireTime += 600000
 
   timeoutBingWallpaper = setTimeout(setBingWallpaper, expireTime)
   console.log('下次Bing壁纸更新时间', moment(Date.now() + expireTime).format('HH:mm:ss LL dddd'))

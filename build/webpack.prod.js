@@ -5,6 +5,7 @@ const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const config = {
   mode: "production",
@@ -51,7 +52,9 @@ const config = {
           reuseExistingChunk: true
         }
       }
-    }
+    },
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   }
 }
 
