@@ -1,6 +1,6 @@
-import screenfull from "screenfull"
-import moment from "moment"
-import {getSettingsLS, isProd, updateSettingsLS} from "./utils"
+import screenfull from 'screenfull'
+import moment from 'moment'
+import {getSettingsLS, isProd, updateSettingsLS} from './utils'
 
 const rootEl = document.getElementById('root')
 const toggleEl = document.getElementById('settings_toggle')
@@ -11,8 +11,8 @@ const footnoteTextEl = document.getElementById('footnote_text')
 const queryObj = getSettingsLS()
 
 // 常量定义
-const BING_API = isProd ? 'https://zencode.top:9003' : '/bing';
-const LS_BING_DATA = 'LITE_CLOCK_BING_WALLPAPER';
+const BING_API = isProd ? 'https://zencode.top:9003' : '/bing'
+const LS_BING_DATA = 'LITE_CLOCK_BING_WALLPAPER'
 let timeoutBingWallpaper = null
 let retryTimes = 0 // 防止死循环
 

@@ -1,4 +1,4 @@
-import qs from "qs"
+import qs from 'qs'
 
 export function getQueryObj() {
   return qs.parse(location.search.slice(1))
@@ -21,9 +21,9 @@ export function updateQuery(obj) {
   const queryString = qs.stringify({...query, ...obj})
 
   if (history.pushState) {
-    const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname +
+    const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname +
       (queryString ? ('?' + queryString) : '')
-    window.history.pushState({path: newurl}, '', newurl);
+    window.history.pushState({path: newurl}, '', newurl)
   } else {
     location.search = queryString
   }

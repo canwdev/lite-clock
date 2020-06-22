@@ -1,15 +1,15 @@
 const utils = require('./utils')
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.base')
-const {CleanWebpackPlugin} = require("clean-webpack-plugin")
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const WorkboxPlugin = require('workbox-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const config = {
-  mode: "production",
-  devtool: "none",
+  mode: 'production',
+  devtool: 'none',
   output: {
     filename: utils.assetsPath('js/[name].[contenthash].js'),
     chunkFilename: utils.assetsPath('js/[id].[contenthash].js')
