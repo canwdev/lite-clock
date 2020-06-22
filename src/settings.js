@@ -1,6 +1,6 @@
 import screenfull from 'screenfull'
 import moment from 'moment'
-import {getSettingsLS, isProd, updateSettingsLS} from './utils'
+import {getSettingsLS, isProd, updateSettingsLS} from '@/utils'
 
 const rootEl = document.getElementById('root')
 const toggleEl = document.getElementById('settings_toggle')

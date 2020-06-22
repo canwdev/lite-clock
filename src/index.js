@@ -4,7 +4,7 @@ import './assets/style/base.styl'
 import './clock'
 import './settings'
 
-import {isProd} from './utils'
+import {isProd} from '@/utils'
 
 if (isProd && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {

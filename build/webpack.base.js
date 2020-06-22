@@ -17,6 +17,12 @@ module.exports = {
     filename: utils.assetsPath('js/[name].js'),
     chunkFilename: utils.assetsPath('js/[name].js')
   },
+  resolve: {
+    extensions: ['.js', '.json'],
+    alias: {
+      '@': utils.resolve('src'),
+    }
+  },
   module: {
     rules: [
       {
