@@ -1,6 +1,6 @@
 {
- "name": "Lite Clock",
- "short_name": "LiteClock",
+ "name": "Apple Watch",
+ "short_name": "AppleWatch",
  "icons": [
   {
    "src": "./favicon.png",

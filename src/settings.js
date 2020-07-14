@@ -5,8 +5,6 @@ import {getSettingsLS, isProd, updateSettingsLS} from '@/utils'
 const rootEl = document.getElementById('root')
 const toggleEl = document.getElementById('settings_toggle')
 const listEl = document.getElementById('settings_list')
-const timeEl = document.getElementById('acc_time')
-const dateEl = document.getElementById('acc_date')
 const footnoteTextEl = document.getElementById('footnote_text')
 const queryObj = getSettingsLS()
 
@@ -77,47 +75,10 @@ if (queryObj.theme === 'bing') {
 }
 
 /**
- * 切换字体缩放
- */
-let scaleRatio = queryObj.scale || 1
-
-function toggleFontSize() {
-  const ratioText = prompt('缩放率', scaleRatio)
-  if (!ratioText) return
-
-  const ratio = parseFloat(ratioText)
-  if (Number.isNaN(ratio)) {
-    alert('请输入一个数值')
-    return
-  }
-  setFontSizeRatio(ratio)
-}
-
-function setFontSizeRatio(ratio) {
-  updateSettingsLS({
-    scale: ratio !== 1 ? ratio : null
-  })
-  if (ratio === 1) {
-    timeEl.style.fontSize = null
-    dateEl.style.fontSize = null
-  }
-  timeEl.style.fontSize = 16 * ratio + 'vw'
-  dateEl.style.fontSize = 6 * ratio + 'vw'
-}
-
-setFontSizeRatio(scaleRatio)
-
-/**
  * 添加设置图标
  */
 function addSettings() {
   const settingsList = [
-    {
-      title: '字体缩放',
-      name: 'F', action: () => {
-        toggleFontSize(scaleRatio)
-      }
-    },
     {
       title: 'Bing 壁纸',
       name: 'B', action: () => {

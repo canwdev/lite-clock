@@ -71,7 +71,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'Lite Clock v' + pkg.version
+      title: 'Apple Watch v' + pkg.version
     }),
     new CopyWebpackPlugin({
       patterns: [
