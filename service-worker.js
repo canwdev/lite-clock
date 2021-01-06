@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.a8f80d1c838f0191913eaa32f1692d2a.js"
+  "precache-manifest.bede116e8f1e42a3c623ca1e53470794.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "always-on-screen"});
